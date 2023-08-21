@@ -1,6 +1,6 @@
 const jwt = require('jwt-simple');
 const User = require('../models/user');
-const { TOKEN_SECRET } = require('../config/dev');
+const keys = require('../config/keys');
 
 const tokenForUser = (user) => {
 	const timestamp = Math.round(Date.now() / 1000);
@@ -10,7 +10,7 @@ const tokenForUser = (user) => {
 			iat: timestamp,
 			exp: timestamp + 5 * 60 * 60,
 		},
-		TOKEN_SECRET
+		keys.TOKEN_SECRET
 	);
 };
 
