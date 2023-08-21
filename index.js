@@ -1,7 +1,5 @@
 const express = require('express');
-const http = require('http');
 const bodyParser = require('body-parser');
-const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -9,6 +7,7 @@ const keys = require('./config/keys');
 const passport = require('passport');
 require('./services/passport');
 
+const app = express();
 app.use(cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -20,7 +19,6 @@ router(app);
 
 // Server Setup
 const port = process.env.PORT || 8080;
-const server = http.createServer(app);
 
 // DB Setup
 mongoose
@@ -33,8 +31,9 @@ mongoose
 	)
 	.then(() => {
 		console.log('🚀 DB Connected!');
-		server.listen(port);
-		console.log('😎 Server listening on:', port);
+		app.listen(port, () => {
+			console.log('😎 Server listening on:', port);
+		});
 	})
 	.catch((err) => {
 		console.log(`❌ DB Connection Error: ${err.message}`);
