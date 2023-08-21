@@ -22,13 +22,10 @@ const port = process.env.PORT || 8080;
 
 // DB Setup
 mongoose
-	.connect(
-		'mongodb+srv://micasa:Vx19Y1Ri9b2IePDR@cluster0.pmsqi.mongodb.net/?retryWrites=true&w=majority',
-		{
-			useNewUrlParser: true,
-			useUnifiedTopology: true,
-		}
-	)
+	.connect(keys.MONGO_URI, {
+		useNewUrlParser: true,
+		useUnifiedTopology: true,
+	})
 	.then(() => {
 		console.log('🚀 DB Connected!');
 		app.listen(port, () => {
