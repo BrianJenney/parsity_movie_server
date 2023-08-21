@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const router = require('./router');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const keys = require('./config/keys');
 const passport = require('passport');
 require('./services/passport');
 
@@ -22,7 +21,7 @@ const port = process.env.PORT || 8080;
 
 // DB Setup
 mongoose
-	.connect(keys.MONGO_URI, {
+	.connect(process.env.MONGO_URI, {
 		useNewUrlParser: true,
 		useUnifiedTopology: true,
 	})
