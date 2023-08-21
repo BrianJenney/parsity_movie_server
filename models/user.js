@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Movie = require('../models/movie');
-var crypto = require('crypto');
+const crypto = require('crypto');
 
 // Define our model
 const UserSchema = new Schema({

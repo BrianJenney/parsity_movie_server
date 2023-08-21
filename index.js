@@ -8,11 +8,6 @@ const cors = require('cors');
 const keys = require('./config/keys');
 const passport = require('passport');
 require('./services/passport');
-// DB Setup
-mongoose.connect(keys.MONGODB_URI, {
-	useNewUrlParser: true,
-	useUnifiedTopology: true,
-});
 
 app.use(cors());
 
@@ -26,5 +21,21 @@ router(app);
 // Server Setup
 const port = process.env.PORT || 8080;
 const server = http.createServer(app);
-server.listen(port);
-console.log('Server listening on:', port);
+
+// DB Setup
+mongoose
+	.connect(
+		'mongodb+srv://micasa:Vx19Y1Ri9b2IePDR@cluster0.pmsqi.mongodb.net/?retryWrites=true&w=majority',
+		{
+			useNewUrlParser: true,
+			useUnifiedTopology: true,
+		}
+	)
+	.then(() => {
+		console.log('🚀 DB Connected!');
+		server.listen(port);
+		console.log('😎 Server listening on:', port);
+	})
+	.catch((err) => {
+		console.log(`❌ DB Connection Error: ${err.message}`);
+	});
